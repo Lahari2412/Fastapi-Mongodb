@@ -54,7 +54,7 @@ from config.db import conn
 from schemas.user import userEntity, usersEntity
 from bcrypt import hashpw, gensalt
 
-user = APIRouter(prefix="/api/v1/user")
+user = APIRouter(prefix="/api/v1/user",tags=['User'])
 
 def get_next_sequence_value(sequence_name):
     seq = conn.local.counters.find_one_and_update(
