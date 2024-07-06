@@ -20,15 +20,13 @@
 #     location:str
 #     password: str
 
-
-# from pydantic import BaseModel, EmailStr, validator
 from pydantic import BaseModel, EmailStr, validator
 from exceptions.exceptions import InvalidUserException
 
 class User(BaseModel):
     name: str
     email: EmailStr
-    mobile_number:int  # Mobile number as integer
+    mobile_number: int  # Mobile number as integer
     location: str
     password: str
 
@@ -43,9 +41,9 @@ class User(BaseModel):
     @validator('email')
     def validate_email(cls, v):
         if not v.endswith('@gmail.com'):
-            raise InvalidUserException(detail='Name must be 15 characters or less')
+            raise InvalidUserException(detail='Email must end with @gmail.com')
         if any(c.isupper() for c in v):
-            raise ValueError('Email must not contain uppercase letters')
+            raise InvalidUserException(detail='Email must not contain uppercase letters')
         return v.lower()  # Convert email to lowercase before storing
 
     @validator('mobile_number')
@@ -69,3 +67,10 @@ class User(BaseModel):
             raise InvalidUserException(detail='Password must contain at least one special character')
         return v
 
+
+class UpdateUser(BaseModel):
+    name: str = None
+    email: EmailStr = None
+    mobile_number: int = None
+    location: str = None
+    password: str = None

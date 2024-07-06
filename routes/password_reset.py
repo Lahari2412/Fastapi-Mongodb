@@ -30,14 +30,13 @@
 #         raise HTTPException(status_code=404, detail="User with the given email not found")
 
 
-from fastapi import APIRouter, HTTPException, Path
+from fastapi import APIRouter, HTTPException
 from pymongo.collection import Collection
 from config.db import conn
 from models.password_reset import PasswordResetRequest
 from bcrypt import hashpw, gensalt
 
-password_reset_router = APIRouter(prefix="/password_reset", tags=['Password Reset'])
-
+password_reset_router = APIRouter(prefix="/api/v1/password_reset", tags=['Password Reset'])
 
 
 @password_reset_router.put('/{email}')
@@ -58,3 +57,6 @@ async def reset_password(email: str,request: PasswordResetRequest):
             raise HTTPException(status_code=500, detail="Password reset failed")
     else:
         raise HTTPException(status_code=404, detail="User with the given email not found")
+    
+
+

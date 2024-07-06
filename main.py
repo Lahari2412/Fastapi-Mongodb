@@ -29,9 +29,7 @@
 #     uvicorn.run(app, host="127.0.0.1", port=8083)
 
 from fastapi import FastAPI,Request
-from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from routes.user import user
 from exceptions.exceptions import InvalidUserException
@@ -53,14 +51,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request, exc):
-    return JSONResponse(
-        status_code=400,
-        content=jsonable_encoder({"detail": exc.errors()})
-    )
-
 
 
 @app.exception_handler(InvalidUserException)
