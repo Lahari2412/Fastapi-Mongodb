@@ -23,7 +23,7 @@ import pymongo
 
 def userEntity(item) -> dict:
     return {
-        # "id": item["id"],  # Assuming "id" is stored as an integer in MongoDB
+        "id": item["id"],  # Assuming "id" is stored as an integer in MongoDB
         "name": item["name"],
         "email": item["email"],
         "mobile_number":item["mobile_number"],
