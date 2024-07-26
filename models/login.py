@@ -1,9 +1,3 @@
-# from pydantic import BaseModel
-
-# class LoginRequest(BaseModel):
-#     email: str
-#     password: str
-
 from pydantic import BaseModel, EmailStr, validator
 from exceptions.exceptions import InvalidUserException
 
@@ -11,13 +5,12 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
+
     @validator('email')
     def validate_email(cls, v):
         if not v.endswith('@gmail.com'):
-            raise InvalidUserException(detail='Email must be a Gmail address')
-        if any(c.isupper() for c in v):
-            raise InvalidUserException(detail='Email must not contain uppercase letters')
-        return v.lower()
+            raise InvalidUserException(detail='Email must end with @gmail.com')
+        return v
 
     @validator('password')
     def validate_password(cls, v):

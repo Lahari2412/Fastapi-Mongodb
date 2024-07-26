@@ -1,22 +1,3 @@
-# import pymongo
-#serializer
-
-# def userEntity(item)->dict: # for single doc
-#    return{
-#       "id":str(item["_id"]),
-#       "name":item["name"],
-#       "email":item["email"],
-#       "password":item["password"]
-#    }
-
-
-
-# def usersEntity(entity):
-#     if isinstance(entity, pymongo.collection.Collection):
-#         entity = list(entity.find())  # Convert Collection to list of documents
-#     return [userEntity(item) for item in entity]
-
-
 # schemas/user.py
 
 import pymongo

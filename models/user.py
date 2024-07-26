@@ -1,25 +1,3 @@
-# from pydantic import BaseModel
-
-# structure of model
-
-# class User(BaseModel):
-
-#     name: str
-#     email: str
-#     password: str
-
-
-
-# from pydantic import BaseModel
-
-# class User(BaseModel):
-#     # id: int  # Manually typed integer ID
-#     name: str
-#     email: str
-#     mobile_number:int
-#     location:str
-#     password: str
-
 from pydantic import BaseModel, EmailStr, validator
 from exceptions.exceptions import InvalidUserException
 
@@ -37,14 +15,14 @@ class User(BaseModel):
         if not v[0].isupper():
             raise InvalidUserException(detail='Name must start with a capital letter')
         return v
-
+    
     @validator('email')
     def validate_email(cls, v):
         if not v.endswith('@gmail.com'):
             raise InvalidUserException(detail='Email must end with @gmail.com')
-        if any(c.isupper() for c in v):
-            raise InvalidUserException(detail='Email must not contain uppercase letters')
-        return v.lower()  # Convert email to lowercase before storing
+        return v
+    
+
 
     @validator('mobile_number')
     def validate_mobile_number(cls, v):

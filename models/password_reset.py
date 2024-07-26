@@ -1,9 +1,3 @@
-# from pydantic import BaseModel
-
-# class PasswordResetRequest(BaseModel):
-#     new_password: str
-
-
 from pydantic import BaseModel, validator
 from exceptions.exceptions import InvalidUserException
 
